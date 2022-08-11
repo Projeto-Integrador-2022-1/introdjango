@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "introdjango"
+version = "0.1.0"
+description = "Aula de Django"
+authors = ["Felipe Bastos <felipebastos@ifce.edu.br>"]
+license = "GPL-3.0"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^4.1"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+pylint = "^2.14.5"
+pylint-django = "^2.5.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

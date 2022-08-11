@@ -1,0 +1,11 @@
+<h1>{{questao.questao_texto}}</h1>
+<ol>
+{% for opcao in questao.opcoes.all %}
+<li>{{opcao.opcao_text}}: {{opcao.votos}} votos
+
+    <a href="/polls/vota/{{opcao.id}}/">Votar neste</a>
+</li>
+{% endfor %}
+</ol>
+
+<a href="/polls/">Voltar para página inicial</a>

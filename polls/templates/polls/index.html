@@ -1,0 +1,6 @@
+<h1>Questões vitais</h1>
+<ol>
+{% for q in questoes %}
+<li><a href="/polls/questao/{{q.id}}/">{{q.questao_texto}}</a></li>
+{% endfor %}
+</ol>
