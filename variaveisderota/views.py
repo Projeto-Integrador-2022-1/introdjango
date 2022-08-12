@@ -14,3 +14,13 @@ def intercaladas(
 ) -> HttpResponse:
     """Variáveis podem ser intercaladas na URL como pode observar no arquivo de urls."""
     return HttpResponse(f"Veja que funciona: {variavel_1}, {variavel_2}.")
+
+
+def calcule(request, valor1, operador, valor2):
+    return HttpResponse(f"{valor1} {operador} {valor2} = {eval(valor1+operador+valor2)}")
+
+
+def queryParams(request):
+    n1 = request.GET.get('n1')
+
+    return HttpResponse(f'Você disse {n1}')

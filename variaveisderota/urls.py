@@ -10,4 +10,6 @@ urlpatterns = [
         views.intercaladas,
         name="intercaladas",
     ),
+    path("calcule/<valor1>/<operador>/<valor2>/", views.calcule, name="calculadora"),
+    path("query/", views.queryParams, name="queryparams"),
 ]
