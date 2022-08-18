@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "polls.apps.PollsConfig",
     "variaveisderota.apps.VariaveisderotaConfig",
+    "aula1808.apps.Aula1808Config",
     "mysite",
 ]
 
