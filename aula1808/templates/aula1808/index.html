@@ -1,0 +1,29 @@
+{% extends 'aula1808/base.html' %}
+{% block title %}Home{% endblock %}
+{% block conteudo %}
+{{block.super}}
+
+<h1>oi oi oi</h1>
+<h2>mexe a cabeça</h2>
+<h3>dançar kuduro!</h3>
+<hr>
+<h1>Olá, {{nome}}! Você é muito doido, ou então bebe gás.</h1>
+<hr>
+<ol>
+{% for nota in notas %}
+{% if nota < 7 %}
+<li style="color: red;">{{nota}}</li>
+{% else %}
+<li>{{nota}}</li>
+{% endif %}
+{% endfor %}
+</ol>
+{% endblock %}
+
+
+
+
+
+
+
+

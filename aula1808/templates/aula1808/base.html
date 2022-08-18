@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <ul>
+        <li>Home</li>
+        <li>Sobre nós</li>
+    </ul>
+    {% if user.is_authenticated %}
+    <h1>Olá, {{user.username}}</h1>
+    {% else %}
+    Faça login, vá lá...
+    {% endif %}
+    {% block conteudo %}
+    O melhor site da sala.
+    {% endblock %}
+    {% url 'home' as home %}
+    <a href="{{ home }}">Página inicial.</a>
+</body>
+</html>
