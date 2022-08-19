@@ -1,11 +1,16 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div class="container bg-dark text-white">
 <h1>{{questao.questao_texto}}</h1>
-<ol>
+<ol class="list-group list-group-numbered">
 {% for opcao in questao.opcoes.all %}
-<li>{{opcao.opcao_text}}: {{opcao.votos}} votos
-
-    <a href="/polls/vota/{{opcao.id}}/">Votar neste</a>
+<li class="list-group-item  bg-dark text-white">{{opcao.opcao_text}}: {{opcao.votos}} votos
+    {% url 'vota' opcao.id as vota %}
+    <a class="btn btn-danger" href="{{vota}}">Votar neste</a>
 </li>
 {% endfor %}
 </ol>
 
-<a href="/polls/">Voltar para página inicial</a>
+<a class="btn btn-warning" href="/polls/">Voltar para página inicial</a>
+</div>
+{% endblock %}

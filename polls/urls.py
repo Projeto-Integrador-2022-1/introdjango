@@ -4,7 +4,7 @@ from django.urls import path
 from polls import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.index, name="questaoindex"),
     path("questao/<questao_id>/", views.questao, name="questao"),
-    path("vota/<opcao_id>/", views.vota, name="vota"),
+    path("escolhe/<opcao_id>/", views.vota, name="vota"),
 ]
