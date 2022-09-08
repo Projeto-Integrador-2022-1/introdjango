@@ -12,4 +12,8 @@
     {{qform.as_ul}}
     <button type="submit">Criar.</button>
 </form>
+{% load i18n %}
+{% language 'pt-br' %}
+Nasceu em {{jogador.data_nascimento}} <br>
+{% endlanguage %}
 {% endblock %}

@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from django.db import models
 
 # Create your models here.
@@ -9,8 +10,10 @@ POSICAO = (
     ("OPO", "Oposto"),
 )
 
+
 class Time(models.Model):
     nome = models.CharField(max_length=30, blank=False)
+    fundacao = models.DateField(default=datetime.today)
 
     def __str__(self) -> str:
         return self.nome
@@ -30,16 +33,26 @@ class Jogador(models.Model):
     posicao = models.CharField("Posição", max_length=3, choices=POSICAO, default='CEN')
     eh_ruim = models.BooleanField("É ruim", default=True)
 
+    pontos_na_temporada = models.IntegerField(default=0)
+
     foto = models.ImageField(
         "Foto de perfil", blank=True, upload_to=user_directory_path
     )
 
-    time = models.ForeignKey(Time, null=True, on_delete=models.SET_NULL)
-
     def __str__(self) -> str:
-        if self.time:
-            return f"{self.nome} que joga no {self.time}"
+        for contrato in self.contratos.all():
+            if contrato and contrato.final > date.today():
+                return f"{self.nome} está contratado por {contrato.time}."
         return f"{self.nome} está desempregado"
+
+class Contrato(models.Model):
+    jogador = models.ForeignKey(Jogador, on_delete=models.DO_NOTHING, related_name="contratos")
+    time = models.ForeignKey(Time, on_delete=models.DO_NOTHING)
+
+    inicio = models.DateField(default=datetime.today)
+    final = models.DateField(default=datetime.today)
+
+    salario = models.FloatField(default=0.0)
 
 
 class Doenca(models.Model):
@@ -53,4 +66,4 @@ class HistoricoMedico(models.Model):
     doencas = models.ManyToManyField(Doenca, blank=True)
 
     def __str__(self) -> str:
-        return f"Histórico médico do {self.jogador.nome} que joga no {self.jogador.time}"
+        return f"Histórico médico do {self.jogador.nome} que joga."

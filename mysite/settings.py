@@ -32,7 +32,7 @@ DEBUG = os.getenv('DEBUG', None)
 
 
 if DEBUG:
-    ALLOWED_HOSTS = ['10.80.11.79']
+    ALLOWED_HOSTS = []
 else:
     ALLOWED_HOSTS = ["ehlogico.pythonanywhere.com"]
 
