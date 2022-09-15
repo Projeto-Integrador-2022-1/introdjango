@@ -15,6 +15,8 @@ class Time(models.Model):
     nome = models.CharField(max_length=30, blank=False)
     fundacao = models.DateField(default=datetime.today)
 
+    plantel = models.ManyToManyField('Jogador', related_name='times', through='Contrato', through_fields=('time', 'jogador'))
+
     def __str__(self) -> str:
         return self.nome
 
@@ -53,6 +55,9 @@ class Contrato(models.Model):
     final = models.DateField(default=datetime.today)
 
     salario = models.FloatField(default=0.0)
+
+    def __str__(self) -> str:
+        return f"Contrato entre {self.jogador.nome} e o time {self.time.nome}"
 
 
 class Doenca(models.Model):
