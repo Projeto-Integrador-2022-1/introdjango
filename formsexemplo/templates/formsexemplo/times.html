@@ -1,0 +1,32 @@
+{% extends 'aula1808/base.html' %}
+{% block conteudo %}
+{% if erro %}
+<h1>{{erro}}</h1>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Cadastrar time</button>
+</form>
+<hr>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ord.</th>
+            <th>Time</th>
+            <th>Fundação</th>
+            <th>Contratos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for time in times %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{time.nome}}</td>
+            <td>{{time.fundacao}}</td>
+            <td><a href="/forms/contratos/{{time.id}}/">Acesse os contratos</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

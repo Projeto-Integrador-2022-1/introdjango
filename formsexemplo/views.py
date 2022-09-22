@@ -1,7 +1,8 @@
+from datetime import date
 from django.shortcuts import render
 
-from formsexemplo.forms import FalaAihForm, NovaQuestao
-from formsexemplo.models import Jogador
+from formsexemplo.forms import FalaAihForm, NovaQuestao, TimeForm
+from formsexemplo.models import Jogador, Time
 
 # Create your views here.
 def home(request):
@@ -23,3 +24,28 @@ def home(request):
     }
 
     return render(request, 'formsexemplo/index.html', context=context)
+
+
+def times(request):
+    novo_time = TimeForm(request.POST or None)
+
+    mensagem_erro = ''
+    if novo_time.is_valid():
+        fundacao = novo_time.cleaned_data['fundacao']
+        nome = novo_time.cleaned_data['nome']
+        if fundacao < date.today() \
+            and fundacao > date(1850, 1, 1) \
+            and "Hitler" not in nome:
+            novo_time.save()
+        else:
+            mensagem_erro = 'Deixa de ser burro.'
+
+    todos_os_times = Time.objects.all().order_by('fundacao')
+
+    context = {
+        'form': novo_time,
+        'erro': mensagem_erro,
+        'times': todos_os_times,
+    }
+
+    return render(request, 'formsexemplo/times.html', context=context)

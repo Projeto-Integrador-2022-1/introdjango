@@ -1,4 +1,6 @@
-from datetime import datetime, date
+import uuid
+
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -42,12 +44,11 @@ class Jogador(models.Model):
     )
 
     def __str__(self) -> str:
-        for contrato in self.contratos.all():
-            if contrato and contrato.final > date.today():
-                return f"{self.nome} está contratado por {contrato.time}."
-        return f"{self.nome} está desempregado"
+        return self.nome
 
 class Contrato(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+
     jogador = models.ForeignKey(Jogador, on_delete=models.DO_NOTHING, related_name="contratos")
     time = models.ForeignKey(Time, on_delete=models.DO_NOTHING)
 
@@ -58,6 +59,11 @@ class Contrato(models.Model):
 
     def __str__(self) -> str:
         return f"Contrato entre {self.jogador.nome} e o time {self.time.nome}"
+
+    def save(self, *args, **kwargs):
+        if not self.uuid:
+            self.id = uuid.uuid4()
+        super(Contrato, self).save(*args, **kwargs)
 
 
 class Doenca(models.Model):

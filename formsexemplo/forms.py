@@ -1,6 +1,8 @@
 from django import forms
 from django.core.validators import RegexValidator
 
+from formsexemplo.models import Time
+
 from polls.models import Questao
 
 class FalaAihForm(forms.Form):
@@ -37,3 +39,9 @@ class NovaQuestao(forms.ModelForm):
     class Meta:
         model = Questao
         fields = ["questao_texto"]
+
+
+class TimeForm(forms.ModelForm):
+    class Meta:
+        model = Time
+        fields = ["nome", "fundacao"]
