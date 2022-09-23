@@ -3,12 +3,14 @@
 {% if erro %}
 <h1>{{erro}}</h1>
 {% endif %}
+{% if user.is_authenticated %}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Cadastrar time</button>
 </form>
 <hr>
+{% endif %}
 <table class="table table-striped table-hover">
     <thead>
         <tr>

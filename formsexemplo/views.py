@@ -1,5 +1,6 @@
 from datetime import date
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, permission_required
 
 from formsexemplo.forms import FalaAihForm, NovaQuestao, TimeForm
 from formsexemplo.models import Jogador, Time
@@ -26,6 +27,8 @@ def home(request):
     return render(request, 'formsexemplo/index.html', context=context)
 
 
+@login_required
+@permission_required('formsexemplo.add_time', login_url='/')
 def times(request):
     novo_time = TimeForm(request.POST or None)
 
